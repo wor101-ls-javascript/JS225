@@ -73,12 +73,29 @@ store3.listPets();
 console.log(store3.__proto__);
 console.log(Object.getPrototypeOf(store3));
 console.log(Object.getPrototypeOf(store3) === CreatePetStore.prototype);
+console.log(Object.getOwnPropertyNames(Object.prototype));
+console.log(Object.getPrototypeOf(CreatePetStore) === Function.prototype);
+console.log(CreatePetStore.constructor);
 
 // constructor property
-console.log(store3.constructor);
-console.log(store3.constructor === CreatePetStore);     // each object created when new used by a constructor function (INCLUDING the constructor function) is automatically give a constructor property
-console.log(CreatePetStore.constructor === Function);   // The constructor property references the Function that created it. The chain ends at the Function function
-console.log('');
+// console.log(store3.constructor);
+// console.log(store3.constructor === CreatePetStore);     // each object created when new used by a constructor function (INCLUDING the constructor function) is automatically give a constructor property
+// console.log(CreatePetStore.constructor === Function);   // The constructor property references the Function that created it. The chain ends at the Function function
+// console.log('');
 // objects created with Object.create and the constructor function
-console.log(obj3.constructor);  //  Objects NOT created by constructor function, always have a constructor property that points to the Object function
-console.log(obj2.constructor === Object);
+// console.log(obj3.constructor);  //  Objects NOT created by constructor function, always have a constructor property that points to the Object function
+// console.log(obj2.constructor === Object);
+
+
+// Objects
+// Objects created from other objects using the Object.create() method:
+//   - have their __proto__ / [[Prototype]] property set to reference the object used to create it 
+//     - chain ends with Object.prototype
+//   - have their constructor property set to the Object function itself
+
+// Objects created from constructor Functions when new keyword is used:
+//   - have their __proto__ / [[Prototype]] property set to the object referenced by the constructor Functions .prototype property
+//     - this .prototype property itself contains a __proto__ / [[Prototype]] property that references the .prototype property of the function that created the constructor function
+//     - the end of the chain is the object reference by Functions.prototype
+//  - the constructor property references the Function that created the object, the end of the chain is the Function function
+// 
