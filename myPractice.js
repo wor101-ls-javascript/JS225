@@ -75,7 +75,7 @@ console.log(Object.getPrototypeOf(store3));
 console.log(Object.getPrototypeOf(store3) === CreatePetStore.prototype);
 console.log(Object.getOwnPropertyNames(Object.prototype));
 console.log(Object.getPrototypeOf(CreatePetStore) === Function.prototype);
-console.log(CreatePetStore.constructor);
+
 
 // constructor property
 // console.log(store3.constructor);
@@ -96,6 +96,6 @@ console.log(CreatePetStore.constructor);
 // Objects created from constructor Functions when new keyword is used:
 //   - have their __proto__ / [[Prototype]] property set to the object referenced by the constructor Functions .prototype property
 //     - this .prototype property itself contains a __proto__ / [[Prototype]] property that references the .prototype property of the function that created the constructor function
-//     - the end of the chain is the object reference by Functions.prototype
+//     - the end of the chain is the object reference by Objects.prototype
 //  - the constructor property references the Function that created the object, the end of the chain is the Function function
 // 
