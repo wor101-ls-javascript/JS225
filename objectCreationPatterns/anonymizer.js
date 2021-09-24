@@ -21,50 +21,80 @@
 //   Other than the above properties, methods, and properties inherited from Object.prototype, 
 //   no other method or property should exist on the object returned by the Account prototype object.
 
-let Account = {
-  init(email, password, firstName, lastName) {
-    this.email = email;
-    this.password = password;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.displayName = displayName();
+let Account = (function() {
+  let userValues = Object.create({});
 
-    function displayName() {
-      return 'akdfgizl';
-    }
-    return this;
-  },
+  return {
+    init(email, password, firstName, lastName) {
+      userEmail = email;
+      userPassword = password;
+      fname = firstName;
+      lname = lastName;
+      this.displayName;
+      this.reanonymize(userPassword);
+  
+      return this;
+    },
 
-  // reanonymize: function(){},
+    reanonymize(pass){
+      if (pass !== userPassword) {
+        return 'Invalid Password';
+      }
+      const CHARACTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let newName = '';
+      
+      for (let i = 0; i < 16; i += 1) {
+        let randomNum = Math.floor(Math.random() * CHARACTERS.length);
+        newName += CHARACTERS[randomNum];
+      }
+      this.displayName = newName;
 
-  // resetPassword: function() {},
-
-  firstName(pass) {
-    if (pass === this.password) {
-      return this.firstName;
-    } else {
-      console.log('Invalid Password');
-    }
-
-  },
-
-  // lastName: function() {},
-
-  email() {},
-
-};
+      return true;
+    },
+  
+    resetPassword(currentPass, newPass) {
+      if (currentPass === userPassword) {
+        userPassword = newPass;
+        return true
+      } else {
+        return 'Invalid Password';
+      }
+    },
+  
+    firstName(pass) {
+      if (pass === userPassword) {
+        return fname;
+      } else {
+        return 'Invalid Password';
+      }
+  
+    },
+  
+    lastName: function() {
+      return lname;
+    },
+  
+    email() {
+      return userEmail;
+    },
+  }
+})();
 
 
 let fooBar = Object.create(Account).init('foo@bar.com', '123456', 'foo', 'bar');
-console.log(fooBar);
-// console.log(fooBar.firstName);                     // returns the firstName function
-// console.log(fooBar.email);                         // returns the email function
-// console.log(fooBar.firstName('123456'));           // logs 'foo'
-// console.log(fooBar.firstName('abc'));              // logs 'Invalid Password'
-// console.log(fooBar.displayName);                   // logs 16 character sequence
-// console.log(fooBar.resetPassword('123', 'abc'))    // logs 'Invalid Password';
-// console.log(fooBar.resetPassword('123456', 'abc')) // logs true
+console.log(fooBar.firstName);                     // returns the firstName function
+console.log(fooBar.email);                         // returns the email function
+console.log(fooBar.firstName('123456'));           // logs 'foo'
+console.log(fooBar.firstName('abc'));              // logs 'Invalid Password'
+console.log(fooBar.displayName);                   // logs 16 character sequence
+console.log(fooBar.resetPassword('123', 'abc'))    // logs 'Invalid Password'
+console.log(fooBar.resetPassword('123456', 'abc')) // logs true
 
-// let displayName = fooBar.displayName;
-// fooBar.reanonymize('abc');                         // returns true
-// console.log(displayName === fooBar.displayName);   // logs false
+let displayName = fooBar.displayName;
+fooBar.reanonymize('abc');                         // returns true
+console.log(displayName === fooBar.displayName);   // logs false
+console.log('');
+
+let bazQux = Object.create(Account).init('baz@qux.com', '123456', 'baz', 'qux');
+console.log(fooBar.firstName('abc'));              // logs 'Invalid Password'
+console.log(fooBar.email('abc'));                  // logs 'Invalid Password'
