@@ -115,7 +115,7 @@ console.log('');
 
 // Pseudo-classical private data
 function newObject(objName, objType) {
-  let secrets = [];
+
   this.objName = objName;
   this.objType = objType;
 }
